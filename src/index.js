@@ -2,23 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom";
 import marked from "marked";
 
-const styles = {
-  unexpanded: {
-    editorHeight: "300px",
-    editorWidth: "500px",
-    previewerHeight: "250px",
-    previewerWidth: "1000px",
-    icon: "fa fas fa-arrows-alt"
-  },
+const classNames = require("classnames");
 
-  expanded: {
-    editorHeight: "90%",
-    editorWidth: "90%",
-    previewerHeight: "90%",
-    previewerWidth: "90%",
-    icon: "fa fas fa-compress"
-  }
-};
+
 
 const defaultValue = `
 # Hello FreeCodeCamp!
@@ -34,6 +20,17 @@ if(sd() === true) {
 function 
 \`\`\`
 
+> Block Quotes!
+
+You can also make text **bold**... whoa!
+
+Or _italic_.
+
+Or... wait for it... **_both!_**
+
+And feel free to go crazy ~~crossing stuff out~~.
+
+
 Here is some inline code: \`<p>Some cooooode!</p> \`
 
 1. Number one in numbered list.
@@ -42,15 +39,14 @@ Here is some inline code: \`<p>Some cooooode!</p> \`
 - Number four.
 * Number five.
 
-
+![React Logo w/ Text](https://goo.gl/Umyytc)
 `;
 
 class Previewer extends React.Component {
   state = {
     markDownInput: defaultValue,
-    style: styles.unexpanded,
-    displayEditor: "",
-    displayPreviewer: ""
+    editorExpanded: false,
+    previewerExpanded: false
   };
 
   inputChanger = e => {
@@ -63,61 +59,71 @@ class Previewer extends React.Component {
   };
 
   expandEditor = () => {
-    this.state.style === styles.expanded
-      ? this.setState({ style: styles.unexpanded, displayPreviewer: "block" })
-      : this.setState({ style: styles.expanded, displayPreviewer: "none" });
+    this.state.editorExpanded === true
+      ? this.setState({ editorExpanded: false })
+      : this.setState({ editorExpanded: true });
   };
 
   expandPrivewer = () => {
-    this.state.style === styles.expanded
-      ? this.setState({ style: styles.unexpanded, displayEditor: "block" })
-      : this.setState({ style: styles.expanded, displayEditor: "none" });
+    this.state.previewerExpanded === true
+      ? this.setState({ previewerExpanded: false })
+      : this.setState({ previewerExpanded: true });
   };
 
   render() {
-    const {
-      editorHeight,
-      editorWidth,
-      previewerHeight,
-      previewerWidth,
-      icon
-    } = this.state.style;
+    const { editorExpanded, previewerExpanded, markDownInput } = this.state;
     return (
       <div id="main">
         <div
           id="editorWrap"
-          className="wrapper"
-          style={{
-            height: editorHeight,
-            width: editorWidth,
-            display: this.state.displayEditor
-          }}
+          className={
+            "wrapper" +
+            classNames({
+              " editorUnexpanded": !editorExpanded,
+              " expanded": editorExpanded,
+              " hidden": previewerExpanded
+            })
+          }
         >
           <div id="header">
             <p>Editor</p>
-            <i className={icon} onClick={this.expandEditor} />
+            <i
+              className={classNames({
+                "fa fas fa-expand" : !editorExpanded,
+                "fa fas fa-compress" : editorExpanded
+              })}
+              onClick={this.expandEditor}
+            />
           </div>
           <textarea
             id="editor"
             rows="20"
-            value={this.state.markDownInput}
+            value={markDownInput}
             onChange={this.inputChanger}
           />
         </div>
         <div
           id="previewWrap"
-          className="wrapper"
-          style={{
-            minHeight: previewerHeight,
-            width: previewerWidth,
-            display: this.state.displayPreviewer
-          }}
+          className={
+            "wrapper" +
+            classNames({
+              " previewerUnexpanded": !previewerExpanded,
+              " expanded": previewerExpanded,
+              " hidden": editorExpanded
+            })
+          }
         >
           <div id="header">
             <p>Previewer</p>
-            <i className={icon} onClick={this.expandPrivewer} />
+            <i
+              className={classNames({
+                "fa fas fa-expand": !previewerExpanded,
+                "fa fas fa-compress": previewerExpanded
+              })}
+              onClick={this.expandPrivewer}
+            />
           </div>
-          <div id="previewer" dangerouslySetInnerHTML={this.setMarkUp()} />
+          <div id="preview" dangerouslySetInnerHTML={this.setMarkUp()} />
         </div>
       </div>
     );
