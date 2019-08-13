@@ -2,14 +2,18 @@
   "name": "fcc-markdown-previewer",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://paulsklv.github.io/fcc-markdown-previewer",
   "dependencies": {
     "classnames": "^2.2.6",
+    "gh-pages": "^2.1.1",
     "marked": "^0.7.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-scripts": "3.1.0"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

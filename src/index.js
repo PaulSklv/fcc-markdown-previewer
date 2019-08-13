@@ -36,8 +36,8 @@ Here is some inline code: \`<p>Some cooooode!</p> \`
 1. Number one in numbered list.
 1. Number two.
 1. Number three...
-- Number four.
-* Number five.
+1. Number four.
+1. Number five.
 
 ![React Logo w/ Text](https://goo.gl/Umyytc)
 `;
