@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css?family=Abril+Fatface&display=swap');
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+#content {
+  width: 100%;
+  height: 100%;
+  background-color: #585558;
+  text-align: center;
+  position: fixed;
+  overflow: auto;
+}
+
+#main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: 100%;
+  text-align: left;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.wrapper {
+  box-shadow: 1px 1px 5px black;
+  background-color: white;
+  border-radius: 5px;
+  #header {
+    position: relative;
+    top: -3px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 30px;
+    width: 100%;
+    background-color: #0d0140;
+    color: white;
+    border: none;
+    box-sizing: border-box;
+    font-family: 'Abril Fatface', cursive;
+    font-size: 1.3em;
+    padding: 10px;
+    border-bottom: 1px solid black;
+    box-shadow: 1px 1px 5px black;
+    border-radius: 5px;
+  }
+
+  i:hover {
+    opacity: 0.7;
+    cursor: pointer;
+  }
+}
+
+#editorWrap {
+  border: 1px solid black;
+  margin-bottom: 20px;
+  min-height: 10px;
+  textarea {
+    resize: vertical;
+    width: 100%;
+    box-sizing: border-box;
+    border: none;
+  }
+}
+
+#previewWrap {
+  border: 1px solid black;
+  background-color: #ffcb97;
+  #preview {
+    width: 100%;
+    min-height: 100px;
+    text-align: left;
+    box-sizing: border-box;
+    margin-left: 10px;
+    code {
+      background: #ffe4d7;
+      font-weight: bold;
+      line-height: 15px;
+    }
+    
+    pre {
+    background: #ffe4d7;
+    padding: 5px;  
+    margin-right: 20px;
+    }
+  }
+  #header {
+    border-bottom: 1px solid black;
+  }
+}
+
+.expanded {
+  width: 90vw;
+  textarea {
+    min-height: 90vh;
+  }
+}
+.editorUnexpanded {
+  min-height: 300px;
+  width: 500px;
+}
+
+.previewerUnexpanded {
+  min-height: 250px;
+  width: 1000px;
+}
+
+.hidden {
+  display: none;
+}
+
+@media screen and (max-width: 1000px) {
+  .previewerUnexpanded {
+    width: 800px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .previewerUnexpanded {
+    width: 700px;
+  }
+}
+
+@media screen and (max-width: 710px) {
+  .previewerUnexpanded {
+    width: 650px;
+  }
+}
